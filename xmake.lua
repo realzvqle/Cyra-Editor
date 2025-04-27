@@ -10,9 +10,7 @@ target("editor")
         add_linkdirs("lib/windows") 
         add_links("raylibdll", "raylib") 
         add_syslinks("gdi32", "winmm") 
-        add_ldflags("/fsanitize=address");
     else
         add_linkdirs("lib/linux") 
         add_links("libraylib.a") 
-        add_ldflags("-fsanitize=address");
     end
