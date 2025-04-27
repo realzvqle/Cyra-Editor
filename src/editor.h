@@ -9,7 +9,8 @@
 #include "raylib/raylib.h"
 #include "raylib/raymath.h"
 #include "raylib/rlgl.h"
-
+#include <stdio.h>
+#include <stdlib.h>
 
 
 

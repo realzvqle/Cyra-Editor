@@ -12,8 +12,10 @@
 
 
 void RGUIInit();
-int RGUICreateButton(int x, int y, int width, int height, const char* text);
+Color RGUIGetApplicationColor();
+int RGUIDrawButton(int x, int y, int width, int height, const char* text);
 void RGUIDrawText(char* text, int x, int y, int fontsize, Color tint);
-int RGUICreateMainTextBox(int x, int y, int width, int height, char* text, int* currentIndex, int fontSize, int textLimit);
-
+Font RGUIGetFont();
+int RGUIDrawWindow(int x, int y, int width, int height, char* title);
+int RGUIDrawTextBox(int x, int y, int width, int height, char* text, int textlim);
 #endif
