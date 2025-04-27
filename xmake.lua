@@ -11,7 +11,8 @@ target("editor")
         add_links("raylibdll", "raylib") 
         add_syslinks("gdi32", "winmm") 
     else
-        add_cxflags("-fsanitize=address");
+        --add_cxflags("-fsanitize=address");
         add_linkdirs("lib/linux") 
-        add_links("libraylib.a") 
+        add_links("libraylib.a")
+        --add_syslinks("asan");
     end

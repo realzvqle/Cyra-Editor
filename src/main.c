@@ -7,7 +7,7 @@
 
 
 
-
+extern void ClosePlatform();
 
 
 int main(){
@@ -26,7 +26,7 @@ int main(){
         ClearBackground(WHITE);
         EndDrawing();
     }
-    EditorCleanUp();
+    // complains about a memory leak on linux when ASAN is enabled
     CloseWindow();
     return 0;
 }
