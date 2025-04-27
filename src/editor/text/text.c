@@ -52,8 +52,10 @@ static inline void AddCharacter(char curKey){
     s_Length++;
 }
 
+
+
 char* EditorTextReturnText(){
-    return strdup(s_EditorsText);
+    return s_EditorsText;
 }
 
 void EditorTextCanWriteToTextbox(bool canwrite){
