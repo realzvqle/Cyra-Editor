@@ -59,6 +59,6 @@ static inline void FileSaveButton(){
     }
 }
 
-void EditorRenderTopbar(){
+void EditorTopBarRenderTopbar(){
     FileSaveButton();
 }

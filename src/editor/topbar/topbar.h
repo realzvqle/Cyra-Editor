@@ -6,10 +6,10 @@
 
 
 
-#include "../../editor.h"
+#include "../../cyra.h"
 
 
-void EditorRenderTopbar();
+void EditorTopBarRenderTopbar();
 
 
 #endif

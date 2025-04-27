@@ -6,7 +6,7 @@
 
 
 
-#include "../editor.h"
+#include "../cyra.h"
 
 
 

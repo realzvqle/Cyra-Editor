@@ -1,5 +1,5 @@
-#ifndef EDITOR_H_INCLUDED
-#define EDITOR_H_INCLUDED
+#ifndef CYRA_H_INCLUDED
+#define CYRA_H_INCLUDED
 
 
 

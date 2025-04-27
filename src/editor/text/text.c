@@ -122,3 +122,7 @@ SKIPTEXTADD:
     return returnvalue;
 }
 
+
+void EditorTextCleanup(){
+    free(s_EditorsText);
+}

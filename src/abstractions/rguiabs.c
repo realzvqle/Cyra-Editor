@@ -1,6 +1,6 @@
 
 /*
-    Some Basic RayGUI Abstractions and extra stuff added on top of it which uses RaygUI
+    Some Basic RayGUI Abstractions and extra stuff added on top of it which uses RayGUI
 */
 
 #define RAYGUI_IMPLEMENTATION
