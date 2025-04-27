@@ -26,7 +26,7 @@ int main(){
         ClearBackground(WHITE);
         EndDrawing();
     }
-    // complains about a memory leak on linux when ASAN is enabled
+    // complains about a memory leak on linux when ASAN is enabled, but seems like a bug on linux instead (????)
     CloseWindow();
     return 0;
 }
