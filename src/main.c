@@ -1,3 +1,4 @@
+#include "abstractions/error.h"
 #include "abstractions/rguiabs.h"
 #include "editor/editor.h"
 #include "editor/text/text.h"
@@ -21,6 +22,7 @@ int main(){
         BeginDrawing();
         EditorTextCreateMainTextBox(0, 90, GetScreenWidth(), GetScreenHeight() - 90, 30);
         EditorTopBarRenderTopbar();
+        ErrRenderAllErrorWindows();
         ClearBackground(WHITE);
         EndDrawing();
     }
