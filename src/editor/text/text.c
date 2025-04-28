@@ -14,6 +14,7 @@ static bool s_EditorsTextInit = false;
 static bool s_CanWrite = true;
 static int s_Capacity = 20;
 static int s_Length = 0;
+static int s_Index = 0;
 static int s_TextboxX = 0;
 static int s_TextBoxY = 0;
 static int s_Fontsize = 0;
@@ -30,7 +31,10 @@ static inline void AddNewline(){
     g_EditorsText[s_EditorsTextIndex] = '\n';
     g_EditorsText[s_EditorsTextIndex + 1] = '\0';
     s_EditorsTextIndex = s_EditorsTextIndex + 1; 
-    s_Length++;
+    if(s_EditorsTextIndex >= s_Length){
+        g_EditorsText[s_EditorsTextIndex + 1] = '\0';
+        s_Length++;
+    }
 }
 
 static inline void HandleBlinker(){
@@ -50,9 +54,11 @@ static inline void AddCharacter(char curKey){
         memset(g_EditorsText + s_Length, '\0', (s_Capacity - s_Length) * sizeof(char));
     }
     g_EditorsText[s_EditorsTextIndex] = curKey;
-    g_EditorsText[s_EditorsTextIndex + 1] = '\0';
     s_EditorsTextIndex = s_EditorsTextIndex + 1; 
-    s_Length++;
+    if(s_EditorsTextIndex >= s_Length){
+        g_EditorsText[s_EditorsTextIndex + 1] = '\0';
+        s_Length++;
+    } 
 }
 
 
@@ -102,6 +108,13 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
             case KEY_RIGHT_SHIFT:
             case KEY_LEFT_SHIFT:
                 break;
+            case KEY_UP:
+                s_EditorsTextIndex--;
+                break;
+            case KEY_DOWN:
+                if(s_Length <= s_EditorsTextIndex) break;
+                s_EditorsTextIndex++;
+                break;
             case KEY_CAPS_LOCK:
                 if(s_IsCaps == false) s_IsCaps = true;
                 else s_IsCaps = false;
@@ -130,6 +143,7 @@ void EditorTextFreeTextMemory(){
 }
 
 void EditorTextAddCharacterOffset(int amount){
+    if(offset > 0) offset = 0;
     offset += (amount * 10);
 }
 
