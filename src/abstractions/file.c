@@ -48,12 +48,11 @@ long FileReadFileEx(Error* err, const char* file, char** string){
 }
 
 
-long FileCheckIfFileExists(Error* err, const char* filename){
+void FileCheckIfFileExists(Error* err, const char* filename){
     FILE* fp = fopen(filename, "r");
     if(!fp){
         ErrCreateError(err, "Couldn't Open File");
-        return -1;
+        return;
     }
-    fclose(fp);
-    
+    fclose(fp); 
 }

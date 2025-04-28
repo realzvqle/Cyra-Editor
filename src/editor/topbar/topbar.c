@@ -120,6 +120,12 @@ static inline void FileSaveButton(){
 
 }
 
+void EditorTopBarSetSave(const char* file){
+    if(strlen(file) >= 255) return;
+    memset(s_CurrentSavedFile, '\0', 255);
+    sprintf(s_CurrentSavedFile, "%s", file);
+}
+
 void EditorTopBarRenderTopbar(){
     FileOpenButton();
     FileSaveButton();

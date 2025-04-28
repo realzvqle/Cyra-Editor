@@ -10,6 +10,6 @@
 
 
 void EditorTopBarRenderTopbar();
-
+void EditorTopBarSetSave(const char* file);
 
 #endif

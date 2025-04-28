@@ -11,5 +11,5 @@
 void FileWriteToFile(Error* err, const char* file, const char* string);
 void FileReadFile(Error* err, const char* file, char** string);
 long FileReadFileEx(Error* err, const char* file, char** string);
-long FileCheckIfFileExists(Error* err, const char* filename);
+void FileCheckIfFileExists(Error* err, const char* filename);
 #endif
