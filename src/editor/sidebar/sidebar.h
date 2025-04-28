@@ -13,7 +13,7 @@
 
 
 void EditorSidebarRenderSideBar();
-
+char* EditorSidebarReturnCurrentFile();
 
 
 

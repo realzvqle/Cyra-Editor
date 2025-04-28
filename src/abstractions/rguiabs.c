@@ -26,6 +26,14 @@ Color RGUIGetTextBoxColorUnfocused(){
     return GetColor(GuiGetStyle(TEXTBOX, BASE_COLOR_DISABLED));;
 }
 
+Color RGUIGetTextColor(){
+    return GetColor(GuiGetStyle(TEXT, TEXT_COLOR_NORMAL));;
+}
+
+Color RGUIGetTextColorFocused(){
+    return GetColor(GuiGetStyle(TEXT, TEXT_COLOR_FOCUSED));;
+}
+
 int RGUIDrawButton(int x, int y, int width, int height, const char* text){
     Rectangle rec = {x, y, width, height};
     return GuiButton(rec, text);

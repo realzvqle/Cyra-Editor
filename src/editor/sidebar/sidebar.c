@@ -7,6 +7,8 @@
 #include "../topbar/topbar.h"
 
 static char s_Filepath[25600] = ".";
+static char s_CurrentFile[256] = "Untitled";
+
 static int s_PosY = 0;
 static int s_Offset = 0;
 
@@ -57,6 +59,8 @@ static inline void PrintFileSystem(const char* directory){
                 sprintf(s_Filepath, "%s", filepath);
 
             } else {
+                memset(s_CurrentFile, '\0', 256);
+                sprintf(s_CurrentFile, "%s", file.name);
                 char filepath[512];
                 sprintf(filepath, "%s/%s", s_Filepath, file.name);
                 EditorTopBarSetSave(filepath);
@@ -90,9 +94,14 @@ void EditorSidebarRenderSideBar(){
     }
     
     DrawRectangleRec(rec, col);
-    RGUIDrawText("Files", 10, (s_PosY + 10) + s_Offset, 30, WHITE);
-    DrawRectangle(0, (s_PosY + 40) + s_Offset, 300, 2, WHITE);
+    RGUIDrawText("Files", 10, (s_PosY + 10) + s_Offset, 30, RGUIGetTextColor());
+    DrawRectangle(0, (s_PosY + 40) + s_Offset, 300, 2, RGUIGetTextColor());
     PrintFileSystem(s_Filepath);
     
     
+}
+
+
+char* EditorSidebarReturnCurrentFile(){
+    return s_CurrentFile;
 }

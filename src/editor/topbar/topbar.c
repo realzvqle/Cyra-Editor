@@ -4,7 +4,7 @@
 #include <string.h>
 #include "../../abstractions/error.h"
 #include "../../abstractions/file.h"
-
+#include "../sidebar/sidebar.h"
 static char s_CurrentSavedFile[255] = "\0";
 
 // only used for FileOpenButton, normally use EditorTextReturnText() for getting the content for 
@@ -32,7 +32,7 @@ static inline void FileOpenButton(){
             drawWindow = false;
 
         }
-        RGUIDrawText("Open File?", x + 10, y + 40, 20, WHITE);
+        RGUIDrawText("Open File?", x + 10, y + 40, 20, RGUIGetTextColor());
         RGUIDrawTextBox(x + 10, y + 70, 320, 40, buffer, 255);
         int ress = RGUIDrawButton(x + 320, y + 150, 70, 40, " Open ");
         if(ress == 1){
@@ -67,7 +67,7 @@ static inline void FileSaveAsButton(){
             drawWindow = false;
 
         }
-        RGUIDrawText("Save File to?", x + 10, y + 40, 20, WHITE);
+        RGUIDrawText("Save File to?", x + 10, y + 40, 20, RGUIGetTextColor());
         RGUIDrawTextBox(x + 10, y + 70, 320, 40, buffer, 255);
         int ress = RGUIDrawButton(x + 320, y + 150, 70, 40, " Save ");
         if(ress == 1){
@@ -128,6 +128,8 @@ void EditorTopBarSetSave(const char* file){
 
 void EditorTopBarRenderTopbar(){
     DrawRectangle(0, 0, GetScreenWidth(), 90, RGUIGetApplicationColor());
+    DrawRectangle(0, 53, GetScreenWidth(), 3, BLACK);
+    RGUIDrawText(EditorSidebarReturnCurrentFile(), 10, 55, 29, RGUIGetTextColor());
     DrawRectangle(0, 87, GetScreenWidth(), 3, BLACK);
     FileOpenButton();
     FileSaveButton();

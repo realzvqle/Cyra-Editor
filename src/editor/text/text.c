@@ -68,9 +68,6 @@ void EditorTextCanWriteToTextbox(bool canwrite){
 int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSize){ 
     if(s_EditorsTextInit == false){
         g_EditorsText = (char*)calloc(s_Capacity, sizeof(char));
-        if(g_EditorsText == NULL){
-            printf("Couldn't Allocate memory!\n");
-        }
         s_EditorsTextInit = true;
     }
     s_TextboxX = x;
@@ -120,7 +117,7 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
     }
     
 SKIPTEXTADD:
-    if(g_EditorsText != NULL) RGUIDrawText(g_EditorsText, s_TextboxX, s_TextBoxY + offset, s_Fontsize, WHITE);
+    if(g_EditorsText != NULL) RGUIDrawText(g_EditorsText, s_TextboxX, s_TextBoxY + offset, s_Fontsize, RGUIGetTextColorFocused());
     if(s_IsFocused){
         EditorTextAddCharacterOffset(GetMouseWheelMove());
     }
