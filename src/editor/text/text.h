@@ -16,9 +16,10 @@
 char* EditorTextReturnText();
 void EditorTextCanWriteToTextbox(bool canwrite);
 int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSize);
+void EditorTextSetIndexLengthAndCapacity(int index, int length, int capacity);
 void EditorTextCleanup();
-
-
+void EditorTextManuallySetInitToTrue();
+void EditorTextLoadFileContentIntoTextbox(char* title);
 
 
 #endif

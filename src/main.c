@@ -1,13 +1,14 @@
 #include "abstractions/error.h"
+#include "abstractions/file.h"
 #include "abstractions/rguiabs.h"
 #include "editor/editor.h"
+#include "editor/sidebar/sidebar.h"
 #include "editor/text/text.h"
 #include "editor/topbar/topbar.h"
 #include "raylib/raylib.h"
 
 
 
-extern void ClosePlatform();
 
 
 int main(){
@@ -16,12 +17,11 @@ int main(){
     InitWindow(1600, 900, "Cyra-Editor");
     RGUIInit();
     SetTargetFPS(60);
-    char* buffer;
-    int i = 0;
     while(!WindowShouldClose()){
         BeginDrawing();
-        EditorTextCreateMainTextBox(0, 90, GetScreenWidth(), GetScreenHeight() - 90, 30);
+        EditorTextCreateMainTextBox(300, 90, GetScreenWidth() + 300, GetScreenHeight() - 90, 30);
         EditorTopBarRenderTopbar();
+        EditorSidebarRenderSideBar();
         ErrRenderAllErrorWindows();
         ClearBackground(BLACK);
         EndDrawing();

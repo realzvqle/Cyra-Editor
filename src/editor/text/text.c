@@ -3,8 +3,10 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include "../../abstractions/error.h"
+#include "../../abstractions/file.h"
 
-static char* s_EditorsText = NULL;
+char* g_EditorsText = NULL;
 static int s_EditorsTextIndex;
 static bool s_IsFocused = false;
 static bool s_IsCaps = false;
@@ -18,14 +20,14 @@ static int s_Fontsize = 0;
 
 static inline void RemoveCharacter(){
     if(s_EditorsTextIndex == 0) return;
-    s_EditorsText[s_EditorsTextIndex - 1] = '\0';
+    g_EditorsText[s_EditorsTextIndex - 1] = '\0';
     s_EditorsTextIndex = s_EditorsTextIndex - 1;
     s_Length--;
 }
 
 static inline void AddNewline(){
-    s_EditorsText[s_EditorsTextIndex] = '\n';
-    s_EditorsText[s_EditorsTextIndex + 1] = '\0';
+    g_EditorsText[s_EditorsTextIndex] = '\n';
+    g_EditorsText[s_EditorsTextIndex + 1] = '\0';
     s_EditorsTextIndex = s_EditorsTextIndex + 1; 
     s_Length++;
 }
@@ -39,15 +41,15 @@ static inline void AddCharacter(char curKey){
         s_Capacity *= 2;
         printf("Reallocating Space to %d\n", s_Capacity);
     REALLOCATE:
-        s_EditorsText = (char*)realloc(s_EditorsText, s_Capacity * sizeof(char));
-        if(s_EditorsText == NULL){
+        g_EditorsText = (char*)realloc(g_EditorsText, s_Capacity * sizeof(char));
+        if(g_EditorsText == NULL){
             printf("Failed Reallocating Memory, Reallocating....\n");
             goto REALLOCATE;
         }
-        memset(s_EditorsText + s_Length, '\0', (s_Capacity - s_Length) * sizeof(char));
+        memset(g_EditorsText + s_Length, '\0', (s_Capacity - s_Length) * sizeof(char));
     }
-    s_EditorsText[s_EditorsTextIndex] = curKey;
-    s_EditorsText[s_EditorsTextIndex + 1] = '\0';
+    g_EditorsText[s_EditorsTextIndex] = curKey;
+    g_EditorsText[s_EditorsTextIndex + 1] = '\0';
     s_EditorsTextIndex = s_EditorsTextIndex + 1; 
     s_Length++;
 }
@@ -55,7 +57,7 @@ static inline void AddCharacter(char curKey){
 
 
 char* EditorTextReturnText(){
-    return s_EditorsText;
+    return g_EditorsText;
 }
 
 void EditorTextCanWriteToTextbox(bool canwrite){
@@ -64,8 +66,8 @@ void EditorTextCanWriteToTextbox(bool canwrite){
 
 int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSize){ 
     if(s_EditorsTextInit == false){
-        s_EditorsText = (char*)calloc(s_Capacity, sizeof(char));
-        if(s_EditorsText == NULL){
+        g_EditorsText = (char*)calloc(s_Capacity, sizeof(char));
+        if(g_EditorsText == NULL){
             printf("Couldn't Allocate memory!\n");
         }
         s_EditorsTextInit = true;
@@ -113,16 +115,40 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
                 AddCharacter(curKey);
                 break;
         } 
-        printf("Text - %d\n", curKey);
+        printf("Text - %s\n", g_EditorsText);
     }
     
 SKIPTEXTADD:
-    if(s_EditorsText != NULL) RGUIDrawText(s_EditorsText, s_TextboxX, s_TextBoxY, s_Fontsize, WHITE);
+    if(g_EditorsText != NULL) RGUIDrawText(g_EditorsText, s_TextboxX, s_TextBoxY, s_Fontsize, WHITE);
     HandleBlinker();
     return returnvalue;
 }
 
+void EditorTextFreeTextMemory(){
+    free(g_EditorsText);
+}
 
+void EditorTextSetIndexLengthAndCapacity(int index, int length, int capacity){
+    s_EditorsTextIndex = index;
+    s_Capacity = capacity;
+    s_Length = length;
+}
 void EditorTextCleanup(){
-    free(s_EditorsText);
+    free(g_EditorsText);
+}
+
+void EditorTextManuallySetInitToTrue(){
+    s_EditorsTextInit = true;
+}
+
+void EditorTextLoadFileContentIntoTextbox(char* title){
+    Error err;
+    free(g_EditorsText);
+    int size = ReadFileEx(&err, title, &g_EditorsText);
+    EditorTextSetIndexLengthAndCapacity(strlen(g_EditorsText), size, size + 90);
+    if(err.hasFailed == true){
+        ErrCreateErrorWindow(err);
+        return;
+    }
+    EditorTextManuallySetInitToTrue();
 }
