@@ -108,12 +108,28 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
             case KEY_RIGHT_SHIFT:
             case KEY_LEFT_SHIFT:
                 break;
-            case KEY_UP:
+            case KEY_LEFT:
                 s_EditorsTextIndex--;
                 break;
-            case KEY_DOWN:
+            case KEY_RIGHT:
                 if(s_Length <= s_EditorsTextIndex) break;
                 s_EditorsTextIndex++;
+                break;
+            case KEY_UP:
+                for(int i = s_EditorsTextIndex; i > 0; i--){
+                    if(g_EditorsText[i] == '\n'){
+                        s_EditorsTextIndex = i;
+                        break;
+                    } 
+                }
+                break;
+            case KEY_DOWN:
+                // for(int i = s_EditorsTextIndex; i < s_Length; i++){
+                //     if(g_EditorsText[i] == '\n'){
+                //         s_EditorsTextIndex = i;
+                //         break;
+                //     } 
+                // }
                 break;
             case KEY_CAPS_LOCK:
                 if(s_IsCaps == false) s_IsCaps = true;
