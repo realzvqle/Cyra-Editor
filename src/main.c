@@ -5,7 +5,6 @@
 #include "editor/sidebar/sidebar.h"
 #include "editor/text/text.h"
 #include "editor/topbar/topbar.h"
-#include "raylib/raylib.h"
 
 
 

@@ -73,7 +73,7 @@ static inline void FileSaveAsButton(){
         if(ress == 1){
             drawWindow = false;
             Error err;
-            WriteToFile(&err, buffer, EditorTextReturnText());
+            FileWriteToFile(&err, buffer, EditorTextReturnText());
             if(err.hasFailed == true){
                 memset(buffer, '\0', 255);
                 ErrCreateErrorWindow(err);
@@ -107,7 +107,7 @@ static inline void FileSaveButton(){
         }
         case 2:{
             Error err;
-            WriteToFile(&err, s_CurrentSavedFile, EditorTextReturnText());
+            FileWriteToFile(&err, s_CurrentSavedFile, EditorTextReturnText());
             if(err.hasFailed == true){
                 ErrCreateErrorWindow(err);
             }

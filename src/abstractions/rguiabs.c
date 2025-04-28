@@ -4,7 +4,7 @@
 */
 
 #define RAYGUI_IMPLEMENTATION
-#include "../raylib/raygui.h"
+#include "../external/raylib/raygui.h"
 
 #include "rguiabs.h"
 

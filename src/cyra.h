@@ -4,11 +4,12 @@
 
 
 
-
-
-#include "raylib/raylib.h"
-#include "raylib/raymath.h"
-#include "raylib/rlgl.h"
+#ifdef _WIN32
+#include "external/raylib/raylib_win32.h"
+#endif
+#include "external/raylib/raylib.h"
+#include "external/raylib/raymath.h"
+#include "external/raylib/rlgl.h"
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -143,12 +143,17 @@ void EditorTextManuallySetInitToTrue(){
 
 void EditorTextLoadFileContentIntoTextbox(char* title){
     Error err;
-    free(g_EditorsText);
-    int size = ReadFileEx(&err, title, &g_EditorsText);
-    EditorTextSetIndexLengthAndCapacity(strlen(g_EditorsText), size, size + 90);
+    FileCheckIfFileExists(&err, title);
     if(err.hasFailed == true){
         ErrCreateErrorWindow(err);
         return;
     }
+    free(g_EditorsText);
+    int size = FileReadFileEx(&err, title, &g_EditorsText);
+    if(err.hasFailed == true){
+        ErrCreateErrorWindow(err);
+        return;
+    }
+    EditorTextSetIndexLengthAndCapacity(strlen(g_EditorsText), size, size + 90);
     EditorTextManuallySetInitToTrue();
 }

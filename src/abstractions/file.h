@@ -8,7 +8,8 @@
 #include "error.h"
 
 
-void WriteToFile(Error* err, const char* file, const char* string);
-void ReadFile(Error* err, const char* file, char** string);
-long ReadFileEx(Error* err, const char* file, char** string);
+void FileWriteToFile(Error* err, const char* file, const char* string);
+void FileReadFile(Error* err, const char* file, char** string);
+long FileReadFileEx(Error* err, const char* file, char** string);
+long FileCheckIfFileExists(Error* err, const char* filename);
 #endif
