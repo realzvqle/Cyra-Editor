@@ -35,7 +35,7 @@ static inline void HandleBlinker(){
 }
 
 static inline void AddCharacter(char curKey){
-    if(s_Length >= s_Capacity){
+    if(s_Length >= s_Capacity - 10){
         s_Capacity *= 2;
         printf("Reallocating Space to %d\n", s_Capacity);
     REALLOCATE:

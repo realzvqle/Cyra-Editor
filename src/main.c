@@ -23,7 +23,7 @@ int main(){
         EditorTextCreateMainTextBox(0, 90, GetScreenWidth(), GetScreenHeight() - 90, 30);
         EditorTopBarRenderTopbar();
         ErrRenderAllErrorWindows();
-        ClearBackground(WHITE);
+        ClearBackground(BLACK);
         EndDrawing();
     }
     // complains about a memory leak on linux when ASAN is enabled, but seems like a bug on linux instead (????)
