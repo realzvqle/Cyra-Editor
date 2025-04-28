@@ -127,6 +127,8 @@ void EditorTopBarSetSave(const char* file){
 }
 
 void EditorTopBarRenderTopbar(){
+    DrawRectangle(0, 0, GetScreenWidth(), 90, RGUIGetApplicationColor());
+    DrawRectangle(0, 87, GetScreenWidth(), 3, BLACK);
     FileOpenButton();
     FileSaveButton();
     FileSaveAsButton();

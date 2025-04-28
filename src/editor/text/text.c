@@ -17,6 +17,7 @@ static int s_Length = 0;
 static int s_TextboxX = 0;
 static int s_TextBoxY = 0;
 static int s_Fontsize = 0;
+static int offset = 0;
 
 static inline void RemoveCharacter(){
     if(s_EditorsTextIndex == 0) return;
@@ -77,9 +78,9 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
     s_Fontsize = fontSize;
     int returnvalue = 0;
     Rectangle rec = {x, y, width, height};
-    Color col = RGUIGetApplicationColor();
-    if(!s_IsFocused) col.a = 155;
-    else col.a = 255;
+    Color col;
+    if(!s_IsFocused) col = RGUIGetTextBoxColorUnfocused();
+    else col = RGUIGetTextBoxColor();
     DrawRectangleRec(rec, col);
     if(IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
         if(CheckCollisionPointRec(GetMousePosition(), rec)){ 
@@ -119,13 +120,20 @@ int EditorTextCreateMainTextBox(int x, int y, int width, int height, int fontSiz
     }
     
 SKIPTEXTADD:
-    if(g_EditorsText != NULL) RGUIDrawText(g_EditorsText, s_TextboxX, s_TextBoxY, s_Fontsize, WHITE);
+    if(g_EditorsText != NULL) RGUIDrawText(g_EditorsText, s_TextboxX, s_TextBoxY + offset, s_Fontsize, WHITE);
+    if(s_IsFocused){
+        EditorTextAddCharacterOffset(GetMouseWheelMove());
+    }
     HandleBlinker();
     return returnvalue;
 }
 
 void EditorTextFreeTextMemory(){
     free(g_EditorsText);
+}
+
+void EditorTextAddCharacterOffset(int amount){
+    offset += (amount * 10);
 }
 
 void EditorTextSetIndexLengthAndCapacity(int index, int length, int capacity){

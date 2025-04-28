@@ -15,9 +15,16 @@ void RGUIInit(){
 }
 
 Color RGUIGetApplicationColor(){
-    return GetColor(GuiGetStyle(TEXTBOX, BASE_COLOR_PRESSED));;
+    return GetColor(GuiGetStyle(DEFAULT, BASE_COLOR_NORMAL));;
 }
 
+Color RGUIGetTextBoxColor(){
+    return GetColor(GuiGetStyle(TEXTBOX, BASE_COLOR_FOCUSED));;
+}
+
+Color RGUIGetTextBoxColorUnfocused(){
+    return GetColor(GuiGetStyle(TEXTBOX, BASE_COLOR_DISABLED));;
+}
 
 int RGUIDrawButton(int x, int y, int width, int height, const char* text){
     Rectangle rec = {x, y, width, height};

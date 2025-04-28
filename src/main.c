@@ -19,8 +19,8 @@ int main(){
     while(!WindowShouldClose()){
         BeginDrawing();
         EditorTextCreateMainTextBox(300, 90, GetScreenWidth() + 300, GetScreenHeight() - 90, 30);
-        EditorTopBarRenderTopbar();
         EditorSidebarRenderSideBar();
+        EditorTopBarRenderTopbar();
         ErrRenderAllErrorWindows();
         ClearBackground(BLACK);
         EndDrawing();

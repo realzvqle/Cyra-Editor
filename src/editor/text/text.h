@@ -20,6 +20,6 @@ void EditorTextSetIndexLengthAndCapacity(int index, int length, int capacity);
 void EditorTextCleanup();
 void EditorTextManuallySetInitToTrue();
 void EditorTextLoadFileContentIntoTextbox(char* title);
-
+void EditorTextAddCharacterOffset(int amount);
 
 #endif

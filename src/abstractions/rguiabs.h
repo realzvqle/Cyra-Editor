@@ -13,6 +13,8 @@
 
 void RGUIInit();
 Color RGUIGetApplicationColor();
+Color RGUIGetTextBoxColor();
+Color RGUIGetTextBoxColorUnfocused();
 int RGUIDrawButton(int x, int y, int width, int height, const char* text);
 void RGUIDrawText(char* text, int x, int y, int fontsize, Color tint);
 Font RGUIGetFont();
