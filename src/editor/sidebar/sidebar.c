@@ -68,6 +68,7 @@ static inline void PrintFileSystem(const char* directory){
             }
         }
     }
+    tinydir_close(&dir);
     
 }
 
